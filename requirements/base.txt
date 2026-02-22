@@ -1,0 +1,7 @@
+# Core dependencies for the FastAPI application
+fastapi
+pydantic
+python-dotenv
+requests
+langchain-groq
+# langchain-core (usually pulled by langchain-groq)

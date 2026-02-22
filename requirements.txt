@@ -1,11 +1,1 @@
-fastapi
-uvicorn
-crewai
-langchain-google-genai
-langchain-groq
-google-generativeai
-groq
-python-dotenv
-pydantic
-requests
-streamlit
+-r requirements/prod.txt
