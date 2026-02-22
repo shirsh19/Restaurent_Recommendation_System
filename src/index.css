@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary-orange: #FF5F1F;
+  --color-primary-red: #E31837;
+  --color-primary-yellow: #FFB800;
+}
+
+body {
+  @apply bg-zinc-950 text-slate-100 selection:bg-orange-500/30;
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.glass {
+  @apply backdrop-blur-md bg-white/10 border border-white/20 shadow-xl;
+}
+
+.glass-dark {
+  @apply backdrop-blur-md bg-zinc-900/80 border border-zinc-800/50 shadow-2xl;
+}
+
+.food-gradient {
+  background: linear-gradient(135deg, var(--color-primary-orange) 0%, var(--color-primary-red) 100%);
+}
+
+.food-gradient-text {
+  @apply text-transparent bg-clip-text;
+  background-image: linear-gradient(135deg, var(--color-primary-yellow) 0%, var(--color-primary-orange) 100%);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
