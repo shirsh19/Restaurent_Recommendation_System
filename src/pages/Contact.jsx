@@ -6,21 +6,21 @@ const Contact = () => {
             name: 'GitHub',
             icon: <Github className="w-6 h-6" />,
             value: 'Project Repository',
-            link: 'https://github.com',
+            link: 'https://github.com/shirsh19',
             color: 'hover:text-white hover:bg-zinc-800'
         },
         {
             name: 'LinkedIn',
             icon: <Linkedin className="w-6 h-6" />,
             value: 'Professional Profile',
-            link: 'https://linkedin.com',
+            link: 'https://www.linkedin.com/in/shirsh-raj-91627a274/',
             color: 'hover:text-blue-500 hover:bg-blue-500/10'
         },
         {
             name: 'Email',
             icon: <Mail className="w-6 h-6" />,
-            value: 'shirsh@example.com',
-            link: 'mailto:shirsh@example.com',
+            value: 'rajshirsh.04@gmail.com',
+            link: 'mailto:rajshirsh.04@gmail.com',
             color: 'hover:text-orange-500 hover:bg-orange-500/10'
         },
     ];

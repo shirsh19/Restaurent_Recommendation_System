@@ -147,13 +147,13 @@ const Recommend = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                             <div className="space-y-2">
-                                <label className="text-sm font-bold text-zinc-400 uppercase tracking-widest ml-1">Investment (₹ Budget)</label>
+                                <label className="text-sm font-bold text-zinc-400 uppercase tracking-widest ml-1">Budget (in rupees)</label>
                                 <div className="relative">
                                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-orange-500 font-bold">₹</span>
                                     <input
                                         type="text"
                                         name="budget"
-                                        placeholder="e.g. 500-1500"
+                                        placeholder="e.g. <100"
                                         className="w-full bg-zinc-900/50 border border-zinc-700 p-4 pl-8 rounded-2xl text-white focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 transition-all placeholder:text-zinc-600"
                                         value={formData.budget}
                                         onChange={handleChange}
