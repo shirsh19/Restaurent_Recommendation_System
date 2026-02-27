@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Search, Loader2, AlertCircle, RefreshCcw } from 'lucide-react';
+import { Search, Loader2, AlertCircle, RefreshCcw, Zap, Timer, Settings } from 'lucide-react';
 import RestaurantCard from '../components/RestaurantCard';
 
 const Recommend = () => {
@@ -14,8 +14,32 @@ const Recommend = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [restaurants, setRestaurants] = useState([]);
+    const [countdown, setCountdown] = useState(null);
+    const [isWaking, setIsWaking] = useState(false);
 
+    useEffect(() => {
+        let timer;
+        if (countdown !== null && countdown > 0) {
+            timer = setInterval(() => {
+                setCountdown((prev) => prev - 1);
+            }, 1000);
+        } else if (countdown === 0) {
+            setIsWaking(false);
+            setCountdown(null);
+        }
+        return () => clearInterval(timer);
+    }, [countdown]);
 
+    const handleWakeUp = async () => {
+        setIsWaking(true);
+        setCountdown(90);
+        try {
+            // Ping the backend to trigger cold start
+            await axios.get('/api/docs');
+        } catch (err) {
+            console.log("Wake up ping sent");
+        }
+    };
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,6 +75,45 @@ const Recommend = () => {
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-6xl font-black mb-4 food-gradient-text tracking-tighter">Find Your Perfect Meal</h1>
                     <p className="text-zinc-500 text-lg">Tell us what you crave, and our AI will handle the rest.</p>
+                </div>
+
+                {/* Backend Wake-up Section */}
+                <div className="max-w-4xl mx-auto mb-8">
+                    <div className="glass-dark p-6 rounded-[2rem] border border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                        <div className="flex items-center gap-4">
+                            <div className="p-3 bg-zinc-800 rounded-2xl">
+                                <Settings className="w-6 h-6 text-zinc-400" />
+                            </div>
+                            <div>
+                                <h2 className="text-lg font-bold text-white tracking-tight">System Configuration</h2>
+                                <p className="text-xs text-zinc-500 uppercase font-black tracking-widest">Backend Protocol: Render Cold Start</p>
+                            </div>
+                        </div>
+
+                        <button
+                            disabled={isWaking}
+                            onClick={handleWakeUp}
+                            className={`min-w-[200px] flex flex-col items-center justify-center p-4 rounded-2xl border transition-all duration-300 ${isWaking
+                                ? 'bg-orange-500/10 border-orange-500/50 text-orange-500'
+                                : 'bg-zinc-900 border-zinc-700 text-zinc-300 hover:border-orange-500/50 hover:text-white'
+                                }`}
+                        >
+                            {isWaking ? (
+                                <>
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <Timer className="w-4 h-4 animate-pulse" />
+                                        <span className="text-sm font-bold">Waking Up...</span>
+                                    </div>
+                                    <span className="text-2xl font-black">{countdown}s</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Zap className="w-5 h-5 mb-1 text-orange-500" />
+                                    <span className="font-bold">Wake up Backend</span>
+                                </>
+                            )}
+                        </button>
+                    </div>
                 </div>
 
                 <div className="max-w-4xl mx-auto mb-16">
